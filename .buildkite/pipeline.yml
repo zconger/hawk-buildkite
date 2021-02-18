@@ -34,7 +34,7 @@ steps:
 
   - wait
 
-  - command: "docker run --detach --rm --publish 8080:80 --name nginx nginx"
+  - command: "docker run --detach --rm --publish 8000:80 --name nginx nginx"
     label: ":eagle: Run Nginx"
 
   - command: "docker pull stackhawk/hawkscan"
