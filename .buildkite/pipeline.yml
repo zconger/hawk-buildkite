@@ -1,15 +1,15 @@
 steps:
   # Docker Compose Example
   - command: "docker-compose down"
-    label: ":eagle: Hawkling down for a clean start"
+    label: ":eagle: Stop service if it's already running"
 
   - wait
 
   - command: "docker-compose up --build --detach"
-    label: ":eagle: Hawkling up"
+    label: ":eagle: Service up"
 
   - command: "docker pull stackhawk/hawkscan"
-    label: ":eagle: Pull the latest HawkScan image"
+    label: ":eagle: Pull HawkScan image"
 
   - wait
 
@@ -23,13 +23,13 @@ steps:
 
   - wait
 
-  - label: ":eagle: Hawkling down"
+  - label: ":eagle: Service down"
     command: docker-compose down
 
   - wait
 
   # Localhost Example
-  - command: "docker stop nginx"
+  - command: "docker stop nginx || echo Nevermind"
     label: ":eagle: Stop Nginx if it's already running"
 
   - wait
@@ -52,8 +52,8 @@ steps:
 
   - wait
 
-  - label: ":eagle: Hawkling down"
-    command: docker-compose down
+  - label: ":eagle: Stop Nginx"
+    command: docker stop nginx
 
 
   # Remote Example
