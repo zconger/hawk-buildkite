@@ -14,7 +14,7 @@ steps:
   - wait
 
   - label: ":eagle: Run HawkScan"
-    key: hawkscan
+    key: hawkscan-compose
     command: |
       docker run -v $(pwd):/hawk:rw -t \
         --network nginet \
@@ -43,7 +43,7 @@ steps:
   - wait
 
   - label: ":eagle: Run HawkScan"
-    key: hawkscan
+    key: hawkscan-local
     command: |
       docker run -v $(pwd):/hawk:rw -t \
         --network host \
@@ -63,7 +63,7 @@ steps:
   - wait
 
   - label: ":eagle: Run HawkScan"
-    key: hawkscan
+    key: hawkscan-remote
     command: |
       docker run -v $(pwd):/hawk:rw -t \
         -e API_KEY \
