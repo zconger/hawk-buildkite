@@ -1,0 +1,4 @@
+app:
+  applicationId: ${APP_ID:cd253c08-5140-4892-b3d3-b2a4bcc07f57}
+  env: ${APP_ENV:Develop}
+  host: ${APP_HOST:http://example.com}

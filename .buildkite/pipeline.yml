@@ -1,0 +1,70 @@
+steps:
+  # Docker Compose Example
+  - command: "docker-compose down"
+    label: ":eagle: Hawkling down for a clean start"
+
+  - wait
+
+  - command: "docker-compose up --build --detach"
+    label: ":eagle: Hawkling up"
+
+  - command: "docker pull stackhawk/hawkscan"
+    label: ":eagle: Pull the latest HawkScan image"
+
+  - wait
+
+  - label: ":eagle: Run HawkScan"
+    key: hawkscan
+    command: |
+      docker run -v $(pwd):/hawk:rw -t \
+        --network nginet \
+        -e API_KEY \
+        stackhawk/hawkscan stackhawk.compose.yml
+
+  - wait
+
+  - label: ":eagle: Hawkling down"
+    command: docker-compose down
+
+  - wait
+
+  # Localhost Example
+  - command: "docker stop nginx"
+    label: ":eagle: Stop Nginx if it's already running"
+
+  - wait
+
+  - command: "docker run --detach --rm --publish 8080:80 --name nginx nginx"
+    label: ":eagle: Run Nginx"
+
+  - command: "docker pull stackhawk/hawkscan"
+    label: ":eagle: Pull the latest HawkScan image"
+
+  - wait
+
+  - label: ":eagle: Run HawkScan"
+    key: hawkscan
+    command: |
+      docker run -v $(pwd):/hawk:rw -t \
+        --network host \
+        -e API_KEY \
+        stackhawk/hawkscan stackhawk.local.yml
+
+  - wait
+
+  - label: ":eagle: Hawkling down"
+    command: docker-compose down
+
+
+  # Remote Example
+  - command: "docker pull stackhawk/hawkscan"
+    label: ":eagle: Pull the latest HawkScan image"
+
+  - wait
+
+  - label: ":eagle: Run HawkScan"
+    key: hawkscan
+    command: |
+      docker run -v $(pwd):/hawk:rw -t \
+        -e API_KEY \
+        stackhawk/hawkscan stackhawk.remote.yml
